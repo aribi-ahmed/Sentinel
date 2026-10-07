@@ -1,0 +1,127 @@
+/* ── Reference asset library ────────────────────────────────────────────── */
+/* The overlay, header, stats band, controls row, body and footer come from
+   ModalShell.css; what follows is only what is specific to file cards. */
+
+.asset-sort {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 40px;
+  padding: 0 10px;
+  border: 1px solid rgba(148,163,184,.14);
+  color: var(--dim);
+}
+.sort-option {
+  padding: 5px 8px;
+  border: 0;
+  background: transparent;
+  color: var(--dim);
+  font: 10px var(--mono);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  transition: color .2s, background .2s;
+}
+.sort-option:hover { color: var(--white); }
+.sort-option.is-active { color: var(--orange); background: rgba(247,147,26,.1); }
+
+.asset-grid { display: grid; gap: 10px; }
+
+.asset-card {
+  display: grid;
+  grid-template-columns: 46px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 16px;
+  padding: 15px 16px;
+  border: 1px solid rgba(148,163,184,.13);
+  border-left: 2px solid rgba(148,163,184,.28);
+  background: rgba(3,3,4,.4);
+  transition: border-color .2s, background .2s, transform .2s, box-shadow .2s;
+}
+.asset-card:hover {
+  border-color: rgba(247,147,26,.32);
+  border-left-color: var(--orange);
+  background: rgba(247,147,26,.045);
+  transform: translateX(3px);
+  box-shadow: 0 16px 34px -28px rgba(247,147,26,.9);
+}
+.asset-card.is-dataset { border-left-color: rgba(125,212,207,.5); }
+.asset-card.is-doc { border-left-color: rgba(247,147,26,.5); }
+
+.asset-glyph {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border: 1px solid rgba(148,163,184,.16);
+  background: rgba(148,163,184,.05);
+  color: var(--muted);
+  transition: color .2s, border-color .2s, background .2s;
+}
+.asset-card.is-dataset .asset-glyph { color: var(--cyan); border-color: rgba(125,212,207,.28); background: rgba(125,212,207,.07); }
+.asset-card.is-doc .asset-glyph { color: var(--orange); border-color: rgba(247,147,26,.28); background: rgba(247,147,26,.07); }
+
+.asset-detail { min-width: 0; }
+.asset-detail h3 {
+  margin: 0;
+  color: var(--white);
+  font: 600 15px var(--sans);
+  letter-spacing: -.01em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.asset-tags {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+  font: 9px var(--mono);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.asset-tags span { color: var(--dim); }
+.tag-ext {
+  padding: 2px 7px;
+  border: 1px solid rgba(148,163,184,.2);
+  background: rgba(148,163,184,.07);
+  color: var(--muted) !important;
+}
+.asset-card.is-dataset .tag-ext { border-color: rgba(125,212,207,.28); color: var(--cyan) !important; }
+.asset-card.is-doc .tag-ext { border-color: rgba(247,147,26,.3); color: var(--orange) !important; }
+.tag-size { color: var(--muted) !important; }
+
+.asset-meter {
+  margin-top: 10px;
+  height: 3px;
+  background: rgba(148,163,184,.1);
+  overflow: hidden;
+}
+.asset-meter span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(247,147,26,.35), var(--orange));
+}
+.asset-card.is-dataset .asset-meter span { background: linear-gradient(90deg, rgba(125,212,207,.3), var(--cyan)); }
+
+.asset-actions { display: flex; gap: 7px; flex-shrink: 0; }
+.asset-action {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(148,163,184,.2);
+  color: var(--muted);
+  background: transparent;
+  transition: color .2s, border-color .2s, background .2s, transform .2s;
+}
+.asset-action:hover { color: var(--white); border-color: rgba(148,163,184,.45); transform: translateY(-2px); }
+.asset-action.is-primary { color: var(--orange); border-color: rgba(247,147,26,.42); background: rgba(247,147,26,.07); }
+.asset-action.is-primary:hover { color: #170c03; background: var(--orange); border-color: var(--orange); box-shadow: 0 0 20px -6px rgba(247,147,26,.9); }
+
+@media (max-width: 720px) {
+  .asset-card { grid-template-columns: 40px minmax(0, 1fr); gap: 12px; }
+  .asset-glyph { width: 40px; height: 40px; }
+  .asset-actions { grid-column: 1 / -1; }
+  .asset-action { flex: 1; }
+}

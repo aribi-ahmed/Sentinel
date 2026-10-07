@@ -1,0 +1,120 @@
+/* ── Audit ledger table ─────────────────────────────────────────────────── */
+.ledger-scroll {
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(247, 147, 26, .4) transparent;
+}
+
+.ledger-grid {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font: 10px var(--mono);
+}
+.ledger-grid th {
+  padding: 0 12px 11px;
+  border-bottom: 1px solid var(--line);
+  color: var(--dim);
+  font-weight: 500;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.ledger-grid td {
+  padding: 12px;
+  border-bottom: 1px solid rgba(148, 163, 184, .08);
+  color: #a8b2be;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+.ledger-grid tbody tr { transition: background .2s; }
+.ledger-grid tbody tr:hover { background: rgba(247, 147, 26, .045); }
+
+.ledger-grid .is-id { color: var(--orange); }
+.ledger-grid .is-company {
+  max-width: 220px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--white);
+  font: 600 12px var(--sans);
+}
+.ledger-grid .is-ticker { color: var(--cyan); letter-spacing: .06em; }
+.ledger-grid .is-date { color: var(--dim); font-size: 9.5px; }
+.ledger-grid th.is-actions, .ledger-grid td.is-actions { text-align: right; }
+
+.ledger-band {
+  --tone: var(--muted);
+  display: inline-block;
+  padding: 3px 9px;
+  border: 1px solid color-mix(in srgb, var(--tone) 38%, transparent);
+  background: color-mix(in srgb, var(--tone) 9%, transparent);
+  color: var(--tone);
+  font: 600 9px var(--mono);
+  letter-spacing: .12em;
+}
+.ledger-band.is-safe { --tone: var(--green); }
+.ledger-band.is-watch { --tone: var(--gold); }
+.ledger-band.is-alert { --tone: var(--orange); }
+.ledger-band.is-critical { --tone: var(--danger); }
+.ledger-band.is-unknown { --tone: var(--dim); }
+
+.ledger-decision {
+  --tone: var(--dim);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--tone);
+  font: 9.5px var(--mono);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.ledger-decision.is-approved { --tone: var(--green); }
+.ledger-decision.is-rejected { --tone: var(--danger); }
+.ledger-decision.is-pending { --tone: var(--dim); }
+
+.ledger-downloads { display: inline-flex; gap: 6px; justify-content: flex-end; }
+.ledger-download {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border: 1px solid rgba(148, 163, 184, .2);
+  color: var(--muted);
+  background: transparent;
+  font: 9.5px var(--mono);
+  letter-spacing: .1em;
+  text-decoration: none;
+  transition: color .2s, border-color .2s, background .2s, transform .2s;
+}
+.ledger-download:hover {
+  color: var(--white);
+  border-color: rgba(148, 163, 184, .45);
+  transform: translateY(-1px);
+}
+.ledger-download.is-primary {
+  color: var(--orange);
+  border-color: rgba(247, 147, 26, .42);
+  background: rgba(247, 147, 26, .07);
+}
+.ledger-download.is-primary:hover {
+  color: #170c03;
+  background: var(--orange);
+  border-color: var(--orange);
+  box-shadow: 0 0 18px -6px rgba(247, 147, 26, .9);
+}
+.ledger-noreport {
+  color: var(--dim);
+  font: 9px var(--mono);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  opacity: .7;
+}
+
+@media (max-width: 860px) {
+  .ledger-grid .is-date { display: none; }
+  .ledger-grid th:nth-child(6) { display: none; }
+}
+@media (max-width: 640px) {
+  .ledger-grid .is-id, .ledger-grid th:nth-child(1) { display: none; }
+  .ledger-downloads { flex-direction: column; }
+}

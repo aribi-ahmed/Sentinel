@@ -1,0 +1,83 @@
+# SENTINEL — data services.
+#
+# Host ports are parameterised so the stack can coexist with another Postgres on
+# the machine: the defaults are the conventional ones (a fresh machine gets
+# 5432/6379), and POSTGRES_PORT / REDIS_PORT in .env override them locally.
+#
+#   docker compose up -d
+#
+# Health checks matter here: the API and the checkpointer must not connect until
+# Postgres is actually accepting queries, otherwise the first investigation of a
+# cold start fails for a reason that looks like a code bug.
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: sentinel-db
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-sentinel_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-sentinel_password}
+      POSTGRES_DB: ${POSTGRES_DB:-sentinel_db}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-sentinel_user} -d ${POSTGRES_DB:-sentinel_db}"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 10s
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: sentinel-cache
+    command: ["redis-server", "--appendonly", "yes"]
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    restart: unless-stopped
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sentinel-api
+    environment:
+      # Inside the compose network the services answer on their own names and
+      # standard ports; the host-side overrides in .env do not apply here.
+      # Quoted throughout: several values contain ':' or '/', which YAML would
+      # otherwise read as structure rather than text.
+      DATABASE_URL: "postgresql+psycopg://${POSTGRES_USER:-sentinel_user}:${POSTGRES_PASSWORD:-sentinel_password}@postgres:5432/${POSTGRES_DB:-sentinel_db}"
+      REDIS_URL: "redis://redis:6379/0"
+      GROQ_API_KEY: "${GROQ_API_KEY:?set GROQ_API_KEY in .env}"
+      TAVILY_API_KEY: "${TAVILY_API_KEY:-}"
+      OPENSANCTIONS_API_KEY: "${OPENSANCTIONS_API_KEY:-}"
+      SEC_USER_AGENT: "${SEC_USER_AGENT:-Sentinel Compliance Research (contact: compliance@sentinel.local)}"
+      # M-01: both providers reach the container, so the same investigation can
+      # be run on either by changing LLM_PROVIDER alone. Ollama is deliberately
+      # not the fallback here — it runs on the host, not inside this network.
+      LLM_PROVIDER: "${LLM_PROVIDER:-groq}"
+      LLM_FALLBACK_PROVIDER: "${LLM_FALLBACK_PROVIDER:-huggingface}"
+      HF_TOKEN: "${HF_TOKEN:-}"
+      HF_MODEL: "${HF_MODEL:-Qwen/Qwen2.5-72B-Instruct}"
+      HF_MODEL_FAST: "${HF_MODEL_FAST:-Qwen/Qwen2.5-72B-Instruct}"
+    ports:
+      - "${API_PORT:-8000}:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  redis_data:

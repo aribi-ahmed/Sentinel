@@ -1,0 +1,60 @@
+[project]
+name = "sentinel"
+version = "0.1.0"
+description = "Multi-agent platform for explainable entity risk assessment with a human approval gate"
+readme = "README.md"
+requires-python = ">=3.14"
+
+dependencies = [
+    # --- API ---------------------------------------------------------------
+    "fastapi>=0.140.7",
+    "uvicorn>=0.51.0",
+    "pydantic>=2.13.4",
+    "pydantic-settings>=2.14.2",
+    "python-dotenv>=1.2.2",
+
+    # --- Orchestration -----------------------------------------------------
+    "langgraph>=1.2.9",
+    "langgraph-checkpoint-postgres>=3.1.2",
+    "langchain-core>=1.5.1",
+    "langchain-community>=0.4.2",
+    "langchain-text-splitters>=0.3.0",
+
+    # --- Model providers (imported only by llm/adapters/) -------------------
+    "langchain-groq>=1.1.3",
+    "langchain-ollama>=1.0.0",
+
+    # --- Retrieval ---------------------------------------------------------
+    "langchain-huggingface>=1.2.2",
+    "sentence-transformers>=5.6.1",
+    "chromadb>=1.5.9",
+    "pypdf>=6.14.2",
+    # pypdf needs this to open AES-encrypted PDFs; the SEC Enforcement Manual is
+    # one, and without it that framework is silently skipped at ingestion.
+    "cryptography>=45.0",
+
+    # --- Persistence -------------------------------------------------------
+    "sqlalchemy>=2.0.51",
+    "psycopg[binary,pool]>=3.3.4",
+    "redis>=8.1.0",
+
+    # --- External data -----------------------------------------------------
+    "yfinance>=1.5.2",
+    "tavily-python>=0.7.27",
+    "httpx>=0.28.1",
+
+    # --- Reporting ---------------------------------------------------------
+    "reportlab>=5.0.1",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/sentinel"]

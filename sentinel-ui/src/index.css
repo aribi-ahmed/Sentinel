@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --void: #030304;
+  --matter: #0b0d10;
+  --panel: #0f1115;
+  --panel-2: #12161b;
+  --line: rgba(148, 163, 184, .16);
+  --line-strong: rgba(247, 147, 26, .52);
+  --white: #f7f8fa;
+  --muted: #8b98aa;
+  --dim: #566171;
+  --orange: #f7931a;
+  --burnt: #ea580c;
+  --gold: #ffd600;
+  --green: #68d391;
+  --danger: #ff6b4a;
+  --cyan: #7dd4cf;
+  --sans: 'Inter', sans-serif;
+  --heading: 'Space Grotesk', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  font-family: var(--sans);
+  font-size: 16px;
+  color: var(--white);
+  background: var(--void);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+.dark {
+  --void: #030304;
+  --matter: #0b0d10;
+  --panel: #0f1115;
+  --panel-2: #12161b;
+  --line: rgba(148, 163, 184, .16);
+  --line-strong: rgba(247, 147, 26, .52);
+  --white: #f7f8fa;
+  --muted: #8b98aa;
+  --dim: #566171;
+  --orange: #f7931a;
+  --burnt: #ea580c;
+  --gold: #ffd600;
+  --green: #68d391;
+  --danger: #ff6b4a;
+  --cyan: #7dd4cf;
+}
+
+* { box-sizing: border-box; }
+html { background: var(--void); }
+body { margin: 0; min-width: 320px; background: var(--void); }
+button, input { font: inherit; }
+button { cursor: pointer; }
+button:disabled { cursor: not-allowed; }
+::selection { background: rgba(247,147,26,.3); color: var(--white); }
+
+#root { min-height: 100dvh; }
+
+.sentinel-shell {
+  min-height: 100dvh;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 74% 7%, rgba(247,147,26,.075), transparent 24rem),
+    radial-gradient(circle at 7% 38%, rgba(234,88,12,.045), transparent 22rem),
+    var(--void);
+  position: relative;
+}
+.sentinel-shell::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: .42;
+  background-image:
+    linear-gradient(rgba(148,163,184,.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148,163,184,.045) 1px, transparent 1px);
+  background-size: 52px 52px;
+  mask-image: radial-gradient(circle at 50% 12%, black 0%, transparent 78%);
+}
+.container { width: min(1240px, calc(100% - 48px)); margin: 0 auto; }
+.font-heading { font-family: var(--heading); }
+.font-mono { font-family: var(--mono); }
+.eyebrow { font: 600 10px/1.2 var(--mono); letter-spacing: .2em; text-transform: uppercase; color: var(--orange); }
+.muted { color: var(--muted); }
+.glass { background: rgba(15,17,21,.72); backdrop-filter: blur(18px); border: 1px solid var(--line); }
+.panel { background: linear-gradient(135deg, rgba(18,22,27,.9), rgba(10,12,15,.88)); border: 1px solid var(--line); }
+.cornered { position: relative; }
+.cornered::before, .cornered::after { content: ''; position: absolute; width: 54px; height: 5px; background: var(--orange); left: -1px; top: -1px; }
+.cornered::after { width: 1px; height: 30px; }
+.focus-ring:focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; }
+.grid-scroll { overflow-x: auto; scrollbar-width: thin; scrollbar-color: rgba(247,147,26,.4) transparent; }
+.data-pre { margin: 0; color: #a7b0bc; font: 15px/1.8 var(--mono); white-space: pre-wrap; overflow-wrap: anywhere; }
+.status-dot { width: 7px; height: 7px; border-radius: 999px; background: var(--green); box-shadow: 0 0 14px rgba(104,211,145,.7); }
+
+@keyframes pulse-ring { 0%,100% { opacity: .35; transform: scale(.95); } 50% { opacity: .8; transform: scale(1.05); } }
+@keyframes shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+@keyframes enter-up { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+.animate-enter { animation: enter-up .55s cubic-bezier(.22,1,.36,1) both; }
+.skeleton { position: relative; overflow: hidden; background: rgba(148,163,184,.1); }
+.skeleton::after { content:''; position:absolute; inset:0; background: linear-gradient(90deg, transparent, rgba(255,255,255,.07), transparent); animation: shimmer 1.6s infinite; }
+
+@media (max-width: 720px) {
+  .container { width: min(100% - 28px, 1240px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
+}

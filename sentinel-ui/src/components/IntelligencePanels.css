@@ -1,0 +1,289 @@
+/* ── Shared shell for the intelligence panels ───────────────────────────── */
+
+.intel-empty {
+  padding: 26px 20px;
+  border: 1px dashed rgba(148, 163, 184, .18);
+  color: var(--dim);
+  font: 12px var(--mono);
+  letter-spacing: .06em;
+  text-align: center;
+}
+
+.intel-panel { --tone: var(--cyan); }
+
+.intel-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 13px;
+  border-bottom: 1px solid rgba(148, 163, 184, .1);
+}
+.intel-head h4 {
+  margin: 6px 0 0;
+  color: var(--white);
+  font: 600 15.5px var(--sans);
+  letter-spacing: -.015em;
+}
+
+.intel-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  padding: 6px 11px;
+  border: 1px solid var(--tone);
+  color: var(--tone);
+  font: 9.5px var(--mono);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.intel-badge.is-safe { --tone: var(--green); }
+.intel-badge.is-alert { --tone: var(--danger); }
+.intel-badge.is-neutral { --tone: var(--muted); }
+.intel-badge.band-minimal, .intel-badge.band-low { --tone: var(--green); }
+.intel-badge.band-moderate { --tone: var(--gold); }
+.intel-badge.band-elevated { --tone: var(--orange); }
+.intel-badge.band-severe { --tone: var(--danger); }
+
+.intel-lede { margin: 13px 0 0; color: var(--muted); font: 12.5px/1.7 var(--sans); }
+
+.intel-subhead {
+  margin: 20px 0 10px;
+  color: var(--dim);
+  font: 9px var(--mono);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+.intel-note {
+  margin: 16px 0 0;
+  padding-top: 12px;
+  border-top: 1px solid rgba(148, 163, 184, .08);
+  color: var(--dim);
+  font: 11px/1.65 var(--sans);
+}
+
+.intel-warn {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 13px;
+  padding: 10px 13px;
+  border-left: 2px solid var(--danger);
+  background: rgba(255, 107, 74, .06);
+  color: var(--muted);
+  font: 12px/1.6 var(--sans);
+}
+.intel-warn svg { flex-shrink: 0; color: var(--danger); }
+
+/* ── Memory timeline ────────────────────────────────────────────────────── */
+.intel-timeline { margin: 16px 0 0; padding: 0 0 0 4px; list-style: none; }
+.intel-timeline li {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 10px 0 10px 14px;
+  border-left: 1px solid rgba(148, 163, 184, .16);
+}
+.intel-timeline li > svg { flex-shrink: 0; margin-left: -21px; background: var(--panel); color: var(--muted); }
+.intel-timeline li > svg.band-minimal, .intel-timeline li > svg.band-low { color: var(--green); }
+.intel-timeline li > svg.band-moderate { color: var(--gold); }
+.intel-timeline li > svg.band-elevated { color: var(--orange); }
+.intel-timeline li > svg.band-severe { color: var(--danger); }
+.intel-timeline div { flex: 1 1 auto; min-width: 0; }
+.intel-timeline strong { display: block; color: var(--white); font: 600 12.5px var(--sans); }
+.intel-timeline span { display: block; margin-top: 3px; color: var(--dim); font: 10px var(--mono); }
+.intel-declined {
+  flex-shrink: 0;
+  padding: 3px 8px;
+  border: 1px solid rgba(255, 107, 74, .3);
+  color: var(--danger);
+  font: 8.5px var(--mono);
+  font-style: normal;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+/* ── Network ────────────────────────────────────────────────────────────── */
+.graph-nodes { margin: 16px 0 0; padding: 0; list-style: none; }
+.graph-node {
+  --tone: var(--line);
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  margin-bottom: 7px;
+  padding: 11px 13px;
+  border: 1px solid var(--line);
+  border-left: 2px solid var(--tone);
+  background: rgba(255, 255, 255, .012);
+}
+.graph-node > svg { flex-shrink: 0; margin-top: 2px; color: var(--muted); }
+.graph-node.is-root { --tone: var(--cyan); background: rgba(125, 212, 207, .05); }
+.graph-node.is-root > svg { color: var(--cyan); }
+.graph-node.is-flagged { --tone: var(--danger); background: rgba(255, 107, 74, .05); }
+.graph-node.is-flagged > svg { color: var(--danger); }
+
+.graph-node-body { flex: 1 1 auto; min-width: 0; }
+.graph-node-body strong { display: block; color: var(--white); font: 600 12.5px var(--sans); }
+.graph-node-body > span { display: block; margin-top: 3px; color: var(--dim); font: 11px var(--sans); }
+.graph-relations { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 7px; }
+.graph-relations em {
+  padding: 2px 7px;
+  border: 1px solid rgba(148, 163, 184, .18);
+  color: var(--muted);
+  font: 8.5px var(--mono);
+  font-style: normal;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.graph-flag {
+  flex-shrink: 0;
+  padding: 3px 8px;
+  border: 1px solid var(--danger);
+  color: var(--danger);
+  font: 8.5px var(--mono);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+/* ── Fraud ──────────────────────────────────────────────────────────────── */
+.fraud-triangle {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+  margin-top: 18px;
+}
+.fraud-condition {
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-top: 2px solid rgba(148, 163, 184, .2);
+  background: rgba(255, 255, 255, .01);
+  opacity: .5;
+  transition: opacity .3s, border-color .3s;
+}
+.fraud-condition.is-present {
+  opacity: 1;
+  border-top-color: var(--orange);
+  background: rgba(247, 147, 26, .05);
+}
+.fraud-condition strong { display: block; color: var(--white); font: 600 12.5px var(--sans); }
+.fraud-condition span { display: block; margin-top: 6px; color: var(--dim); font: 11px/1.55 var(--sans); }
+.fraud-condition em {
+  display: block;
+  margin-top: 9px;
+  color: var(--muted);
+  font: 8.5px var(--mono);
+  font-style: normal;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.fraud-condition.is-present em { color: var(--orange); }
+
+.fraud-patterns { margin-top: 4px; }
+.fraud-pattern {
+  margin-bottom: 8px;
+  padding: 12px 14px;
+  border: 1px solid rgba(255, 107, 74, .2);
+  border-left: 2px solid var(--danger);
+  background: rgba(255, 107, 74, .04);
+}
+.fraud-pattern-head { display: flex; align-items: center; gap: 8px; }
+.fraud-pattern-head svg { flex-shrink: 0; color: var(--danger); }
+.fraud-pattern-head strong { flex: 1 1 auto; color: var(--white); font: 600 12.5px var(--sans); }
+.fraud-pattern-head span {
+  flex-shrink: 0;
+  padding: 2px 8px;
+  border: 1px solid var(--danger);
+  color: var(--danger);
+  font: 9px var(--mono);
+}
+.fraud-pattern p { margin: 8px 0 0; color: var(--muted); font: 12px/1.65 var(--sans); }
+
+.fraud-signals { margin: 0; padding: 0; list-style: none; }
+.fraud-signal {
+  --tone: var(--dim);
+  margin-bottom: 7px;
+  padding: 11px 13px;
+  border: 1px solid var(--line);
+  border-left: 2px solid var(--tone);
+  background: rgba(255, 255, 255, .012);
+}
+.fraud-signal.is-pressure { --tone: var(--gold); }
+.fraud-signal.is-opportunity { --tone: var(--cyan); }
+.fraud-signal.is-disclosure { --tone: var(--danger); }
+
+.fraud-signal-head { display: flex; align-items: center; gap: 10px; }
+.fraud-signal-head strong { flex: 1 1 auto; color: var(--white); font: 600 12.5px var(--sans); }
+.fraud-weight {
+  flex-shrink: 0;
+  min-width: 26px;
+  text-align: center;
+  padding: 2px 6px;
+  border: 1px solid var(--tone);
+  color: var(--tone);
+  font: 9px var(--mono);
+}
+.fraud-signal p { margin: 7px 0 0; color: var(--muted); font: 11.5px/1.6 var(--sans); }
+.fraud-signal em {
+  display: block;
+  margin-top: 7px;
+  color: var(--tone);
+  font: 8.5px var(--mono);
+  font-style: normal;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 640px) {
+  .intel-head { flex-direction: column; gap: 10px; }
+}
+
+/* ── Network diagram ────────────────────────────────────────────────────── */
+.network-diagram {
+  margin-top: 18px;
+  padding: 8px;
+  border: 1px solid var(--line);
+  background:
+    radial-gradient(circle at 50% 50%, rgba(125, 212, 207, .05), transparent 62%),
+    rgba(3, 3, 4, .45);
+  overflow-x: auto;
+}
+.network-diagram svg { display: block; width: 100%; min-width: 460px; height: auto; }
+
+.net-edge {
+  stroke: rgba(148, 163, 184, .28);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+}
+.net-edge.is-flagged { stroke: rgba(255, 107, 74, .55); stroke-dasharray: none; stroke-width: 1.4; }
+
+.net-node {
+  fill: rgba(15, 17, 21, .95);
+  stroke: rgba(148, 163, 184, .4);
+  stroke-width: 1.4;
+  transition: stroke .2s, fill .2s;
+}
+.net-node.is-root { fill: rgba(125, 212, 207, .12); stroke: var(--cyan); stroke-width: 2; }
+.net-node.is-registrant { stroke: rgba(125, 212, 207, .55); }
+.net-node.is-watchlist,
+.net-node.is-programme,
+.net-node.is-flagged { fill: rgba(255, 107, 74, .12); stroke: var(--danger); stroke-width: 1.8; }
+
+.net-label {
+  fill: var(--muted);
+  font: 9.5px var(--mono);
+  letter-spacing: .02em;
+}
+.net-label.is-root { fill: var(--white); font-size: 11px; font-weight: 600; }
+
+.graph-node-title { display: flex; align-items: baseline; gap: 9px; flex-wrap: wrap; }
+.graph-kind {
+  flex-shrink: 0;
+  color: var(--dim);
+  font: 8.5px var(--mono);
+  font-style: normal;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}

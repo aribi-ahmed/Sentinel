@@ -1,0 +1,146 @@
+/* ── SEC EDGAR filings ──────────────────────────────────────────────────── */
+.filings-panel {
+  margin-bottom: 18px;
+  padding: 18px 20px 16px;
+  border: 1px solid rgba(125, 212, 207, .16);
+  border-left: 2px solid var(--cyan);
+  background: linear-gradient(135deg, rgba(125, 212, 207, .045), rgba(6, 8, 11, .5));
+}
+.filings-panel.is-unmatched { border-left-color: rgba(148, 163, 184, .35); background: rgba(148, 163, 184, .03); }
+
+.filings-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(148, 163, 184, .1);
+}
+.filings-head h4 {
+  margin: 7px 0 0;
+  color: var(--white);
+  font: 600 16px var(--sans);
+  letter-spacing: -.015em;
+}
+.filings-sub {
+  display: block;
+  margin-top: 5px;
+  color: var(--dim);
+  font: 9.5px var(--mono);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.filings-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  padding: 6px 11px;
+  border: 1px solid rgba(125, 212, 207, .3);
+  color: var(--cyan);
+  font: 9.5px var(--mono);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: color .2s, border-color .2s, background .2s;
+}
+.filings-link:hover { color: var(--white); border-color: var(--cyan); background: rgba(125, 212, 207, .1); }
+
+.filings-note { margin: 12px 0 0; color: var(--muted); font: 12.5px/1.7 var(--sans); }
+
+.filings-facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px 18px;
+  margin: 14px 0 0;
+}
+.filings-facts dt {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--dim);
+  font: 9px var(--mono);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.filings-facts dd {
+  margin: 6px 0 0;
+  color: var(--white);
+  font: 11.5px var(--mono);
+  overflow-wrap: anywhere;
+}
+.filings-facts .is-safe dd { color: var(--green); }
+.filings-facts .is-watch dd { color: var(--gold); }
+.filings-facts .is-alert dd { color: var(--orange); }
+
+.filings-events { margin-top: 16px; padding-top: 14px; border-top: 1px solid rgba(148, 163, 184, .1); }
+.filings-events-head {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 11px;
+  color: var(--dim);
+  font: 9px var(--mono);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.filings-events-head span {
+  padding: 1px 7px;
+  border: 1px solid rgba(148, 163, 184, .22);
+  color: var(--muted);
+  font-size: 9px;
+}
+
+.filings-clean {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 13px;
+  border-left: 2px solid var(--green);
+  background: rgba(104, 211, 145, .05);
+  color: #b6d9c4;
+  font: 12px/1.6 var(--sans);
+}
+.filings-clean svg { flex-shrink: 0; color: var(--green); }
+
+.filings-events ul { display: grid; gap: 7px; margin: 0; padding: 0; list-style: none; }
+.filings-events li {
+  --tone: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 10px 12px;
+  border-left: 2px solid var(--tone);
+  background: color-mix(in srgb, var(--tone) 6%, transparent);
+}
+.filings-events li.is-severe { --tone: var(--danger); }
+.filings-events li.is-elevated { --tone: var(--orange); }
+.filings-events li.is-moderate { --tone: var(--gold); }
+.filings-events li.is-low { --tone: var(--muted); }
+.filings-events li svg { flex-shrink: 0; color: var(--tone); }
+.filings-events li div { flex: 1; min-width: 0; }
+.filings-events li strong { display: block; color: var(--white); font: 600 12.5px var(--sans); }
+.filings-events li span {
+  display: block;
+  margin-top: 3px;
+  color: var(--dim);
+  font: 9.5px var(--mono);
+  letter-spacing: .06em;
+}
+.filings-severity {
+  flex-shrink: 0;
+  padding: 2px 8px;
+  border: 1px solid color-mix(in srgb, var(--tone) 40%, transparent);
+  color: var(--tone) !important;
+  font: 9px var(--mono) !important;
+  letter-spacing: .1em !important;
+  text-transform: uppercase;
+  margin-top: 0 !important;
+}
+
+@media (max-width: 640px) {
+  .filings-panel { padding: 15px 15px 13px; }
+  .filings-head { flex-direction: column; gap: 10px; }
+  .filings-events li { flex-wrap: wrap; }
+  .filings-severity { margin-left: 24px !important; }
+}

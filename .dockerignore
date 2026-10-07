@@ -1,0 +1,30 @@
+# Keep the build context small and secrets out of the image.
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+node_modules/
+sentinel-ui/
+dist/
+build/
+
+.env
+*.db
+*.sqlite3
+
+# Rebuilt inside the image from ./docs.
+chroma_db/
+chroma_compliance/
+
+# The bulk OFAC exports are ~700 MB and must not enter the build context, but
+# the two files the Dockerfile copies have to remain visible to it.
+datasets/*
+!datasets/sdn.csv
+!datasets/alt.csv
+
+.git/
+.github/
+docs/legacy/
+docs/rapport/

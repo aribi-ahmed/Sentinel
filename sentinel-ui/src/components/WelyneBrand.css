@@ -1,0 +1,68 @@
+/* ── Welyne brand ───────────────────────────────────────────────────────────
+   Sits first in the topbar, ahead of the product mark: the company owns the
+   page, the product is what the page is. */
+
+:root {
+  --welyne-orange: #e24405;
+  /* Caviar Dreams is the brand face. Questrial is the closest geometric sans on
+     Google Fonts and carries the same wide, round character when the licensed
+     file is not installed locally. */
+  --welyne-font: 'Caviar Dreams', 'Questrial', 'Century Gothic', 'Futura',
+    var(--sans, 'Inter', sans-serif);
+}
+
+.welyne-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  padding: 4px 6px;
+  margin-left: -6px;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: opacity .2s ease, transform .2s ease;
+}
+.welyne-brand:hover { opacity: .82; }
+.welyne-brand:active { transform: scale(.98); }
+
+.welyne-mark {
+  display: block;
+  flex-shrink: 0;
+  transition: transform .45s cubic-bezier(.22, 1, .36, 1);
+}
+.welyne-brand:hover .welyne-mark { transform: rotate(18deg); }
+
+.welyne-wordmark {
+  /* The values are the brand's own: 1.7rem, bold, 0.02em tracking, white. */
+  font-family: var(--welyne-font);
+  font-size: 1.7rem;
+  font-weight: 700;
+  letter-spacing: .02em;
+  line-height: 1;
+  color: #fff;
+  white-space: nowrap;
+}
+
+/* The divider between the company and the product it ships. */
+.brand-divider {
+  width: 1px;
+  height: 26px;
+  flex-shrink: 0;
+  background: var(--line, rgba(148, 163, 184, .16));
+}
+
+@media (max-width: 900px) {
+  .welyne-wordmark { font-size: 1.25rem; }
+  .welyne-mark { width: 24px; height: 24px; }
+}
+
+@media (max-width: 560px) {
+  /* On the narrowest screens the mark alone carries the brand. */
+  .welyne-wordmark { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .welyne-brand:hover .welyne-mark { transform: none; }
+  .welyne-brand,
+  .welyne-mark { transition: none; }
+}

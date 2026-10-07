@@ -1,0 +1,135 @@
+/* ── Critic review ──────────────────────────────────────────────────────────
+   Sits beside the verdict it examined. The tone follows the disposition, so a
+   rejection cannot be mistaken for an endorsement at a glance. */
+
+.critic-panel {
+  --tone: var(--cyan);
+  margin-top: 18px;
+  padding: 18px 20px 16px;
+  border: 1px solid var(--line);
+  border-left: 2px solid var(--tone);
+  background: linear-gradient(135deg, rgba(255, 255, 255, .022), rgba(6, 8, 11, .5));
+}
+.critic-panel.is-endorsed { --tone: var(--green); }
+.critic-panel.is-qualified { --tone: var(--gold); }
+.critic-panel.is-rejected { --tone: var(--danger); }
+
+.critic-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 13px;
+  border-bottom: 1px solid rgba(148, 163, 184, .1);
+}
+.critic-title { display: flex; align-items: flex-start; gap: 11px; }
+.critic-title > svg { flex-shrink: 0; margin-top: 2px; color: var(--tone); }
+.critic-title h4 {
+  margin: 6px 0 0;
+  color: var(--white);
+  font: 600 15.5px var(--sans);
+  letter-spacing: -.015em;
+}
+
+.critic-penalty {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  padding: 6px 11px;
+  border: 1px solid rgba(255, 107, 74, .3);
+  color: var(--danger);
+  font: 9.5px var(--mono);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.critic-penalty em { color: var(--dim); font-style: normal; }
+
+.critic-blurb {
+  margin: 13px 0 0;
+  color: var(--muted);
+  font: 12.5px/1.7 var(--sans);
+}
+
+.critic-revision,
+.critic-degraded {
+  margin-top: 12px;
+  padding: 9px 12px;
+  border-left: 2px solid var(--gold);
+  background: rgba(255, 214, 0, .05);
+  color: var(--muted);
+  font: 11.5px/1.6 var(--sans);
+}
+.critic-degraded { border-left-color: var(--dim); background: rgba(148, 163, 184, .04); }
+
+.critic-clean {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 14px;
+  padding: 12px 14px;
+  border: 1px solid rgba(104, 211, 145, .18);
+  background: rgba(104, 211, 145, .045);
+  color: var(--muted);
+  font: 12px/1.6 var(--sans);
+}
+.critic-clean svg { flex-shrink: 0; color: var(--green); }
+
+/* ── Challenges ──────────────────────────────────────────────────────────── */
+.critic-challenges { margin: 15px 0 0; padding: 0; list-style: none; }
+
+.critic-challenge {
+  --tone: var(--dim);
+  margin-bottom: 9px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-left: 2px solid var(--tone);
+  background: rgba(255, 255, 255, .014);
+}
+.critic-challenge.is-blocking { --tone: var(--danger); }
+.critic-challenge.is-material { --tone: var(--gold); }
+.critic-challenge.is-advisory { --tone: var(--dim); }
+
+.critic-challenge-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.critic-challenge-head svg { flex-shrink: 0; color: var(--tone); }
+.critic-challenge-head strong {
+  flex: 1 1 auto;
+  color: var(--white);
+  font: 600 12.5px var(--sans);
+  letter-spacing: -.01em;
+}
+.critic-severity {
+  flex-shrink: 0;
+  padding: 3px 8px;
+  border: 1px solid var(--tone);
+  color: var(--tone);
+  font: 8.5px var(--mono);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.critic-detail {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font: 12px/1.65 var(--sans);
+}
+.critic-remedy {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  margin: 9px 0 0;
+  padding-top: 9px;
+  border-top: 1px solid rgba(148, 163, 184, .08);
+  color: var(--cyan);
+  font: 11.5px/1.55 var(--sans);
+}
+.critic-remedy svg { flex-shrink: 0; margin-top: 2px; }
+
+@media (max-width: 640px) {
+  .critic-head { flex-direction: column; gap: 10px; }
+}

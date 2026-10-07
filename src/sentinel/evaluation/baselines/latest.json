@@ -1,0 +1,159 @@
+{
+  "started_at": "2026-08-22T16:52:35.891477+00:00",
+  "duration_s": 80.9,
+  "cases": 10,
+  "passed_cases": 10,
+  "checks_passed": 179,
+  "checks_total": 179,
+  "rate": 1.0,
+  "usage": {
+    "calls": 35,
+    "cache_hits": 31,
+    "cache_hit_rate": 0.886,
+    "prompt_tokens": 43813,
+    "completion_tokens": 21849,
+    "total_tokens": 65662,
+    "cost_usd": 0.003243,
+    "fallbacks": 0,
+    "by_caller": {
+      "research_analyst": {
+        "calls": 9,
+        "cache_hits": 9,
+        "tokens": 2512,
+        "cost_usd": 0.0,
+        "latency_ms": 0,
+        "provider": "groq",
+        "model": "openai/gpt-oss-20b"
+      },
+      "compliance_analyst": {
+        "calls": 9,
+        "cache_hits": 9,
+        "tokens": 20900,
+        "cost_usd": 0.0,
+        "latency_ms": 0,
+        "provider": "groq",
+        "model": "openai/gpt-oss-120b"
+      },
+      "supervisor": {
+        "calls": 9,
+        "cache_hits": 7,
+        "tokens": 32569,
+        "cost_usd": 0.002231,
+        "latency_ms": 5890,
+        "provider": "groq",
+        "model": "openai/gpt-oss-120b"
+      },
+      "critic": {
+        "calls": 8,
+        "cache_hits": 6,
+        "tokens": 9681,
+        "cost_usd": 0.001012,
+        "latency_ms": 4421,
+        "provider": "groq",
+        "model": "openai/gpt-oss-120b"
+      }
+    }
+  },
+  "by_case": {
+    "alphabet-low": {
+      "case_id": "alphabet-low",
+      "subject": "Alphabet Inc. (GOOGL)",
+      "passed": 21,
+      "total": 21,
+      "rate": 1.0,
+      "ok": true,
+      "error": "",
+      "failures": []
+    },
+    "microsoft-low": {
+      "case_id": "microsoft-low",
+      "subject": "Microsoft Corporation (MSFT)",
+      "passed": 20,
+      "total": 20,
+      "rate": 1.0,
+      "ok": true,
+      "error": "",
+      "failures": []
+    },
+    "wolfspeed-distress": {
+      "case_id": "wolfspeed-distress",
+      "subject": "Wolfspeed (WOLF)",
+      "passed": 21,
+      "total": 21,
+      "rate": 1.0,
+      "ok": true,
+      "error": "",
+      "failures": []
+    },
+    "lucid-moderate": {
+      "case_id": "lucid-moderate",
+      "subject": "Lucid Group (LCID)",
+      "passed": 19,
+      "total": 19,
+      "rate": 1.0,
+      "ok": true,
+      "error": "",
+      "failures": []
+    },
+    "rosneft-sanctioned": {
+      "case_id": "rosneft-sanctioned",
+      "subject": "Rosneft",
+      "passed": 21,
+      "total": 21,
+      "rate": 1.0,
+      "ok": true,
+      "error": "",
+      "failures": []
+    },
+    "bank-melli-sanctioned": {
+      "case_id": "bank-melli-sanctioned",
+      "subject": "Bank Melli Iran",
+      "passed": 19,
+      "total": 19,
+      "rate": 1.0,
+      "ok": true,
+      "error": "",
+      "failures": []
+    },
+    "cuba-bank-sanctioned": {
+      "case_id": "cuba-bank-sanctioned",
+      "subject": "Banco Nacional de Cuba",
+      "passed": 18,
+      "total": 18,
+      "rate": 1.0,
+      "ok": true,
+      "error": "",
+      "failures": []
+    },
+    "alphabet-not-alphabet-international": {
+      "case_id": "alphabet-not-alphabet-international",
+      "subject": "Alphabet Inc. (GOOGL)",
+      "passed": 17,
+      "total": 17,
+      "rate": 1.0,
+      "ok": true,
+      "error": "",
+      "failures": []
+    },
+    "unlisted-private-entity": {
+      "case_id": "unlisted-private-entity",
+      "subject": "Acme Trading Limited",
+      "passed": 19,
+      "total": 19,
+      "rate": 1.0,
+      "ok": true,
+      "error": "",
+      "failures": []
+    },
+    "empty-subject": {
+      "case_id": "empty-subject",
+      "subject": "",
+      "passed": 4,
+      "total": 4,
+      "rate": 1.0,
+      "ok": true,
+      "error": "",
+      "failures": []
+    }
+  }
+}

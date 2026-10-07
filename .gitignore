@@ -1,0 +1,56 @@
+# --- Environments ------------------------------------------------------------
+.venv/
+venv/
+ENV/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# --- Node --------------------------------------------------------------------
+node_modules/
+dist/
+build/
+.vite/
+
+# --- Secrets and local state -------------------------------------------------
+.env
+*.db
+*.sqlite3
+
+# --- Generated indexes -------------------------------------------------------
+# Rebuilt from ./docs by `python ingest_compliance.py`; not source.
+chroma_db/
+chroma_compliance/
+
+# --- Datasets ----------------------------------------------------------------
+# The OFAC exports total ~700 MB. Only the two files the sanctions screen
+# actually reads are tracked, so a fresh clone can screen names without a
+# separate download; the bulk name/address/tag exports stay out.
+datasets/*
+!datasets/sdn.csv
+!datasets/alt.csv
+
+# --- Documentation -----------------------------------------------------------
+# Everything under docs/ IS tracked: the ADRs, the architecture overview and the
+# regulatory corpus (~3 MB) that `ingest_compliance.py` indexes. Without the
+# corpus in the repository the retrieval layer cannot be rebuilt from a clone.
+!docs/
+!docs/**
+
+# --- Editor / OS -------------------------------------------------------------
+.DS_Store
+Thumbs.db
+*.swp
+
+# Build artefacts
+*.egg-info/
+
+# Local tooling
+.claude/
+
+# Internship report — academic deliverable, not part of the source project
+docs/rapport/
+!docs/media/
+
+# Local database dumps — carry investigation data, and are large
+backups/

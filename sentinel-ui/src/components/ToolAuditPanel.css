@@ -1,0 +1,232 @@
+/* ── Tool audit trail ───────────────────────────────────────────────────────
+   Provenance, not findings: what was called, with what, and what came back.
+   Each outcome carries its own colour because the four states are not
+   interchangeable — "found nothing" and "never ran" must never read alike. */
+
+.tool-audit-empty {
+  padding: 26px 20px;
+  border: 1px dashed rgba(148, 163, 184, .18);
+  color: var(--dim);
+  font: 12px var(--mono);
+  letter-spacing: .06em;
+  text-align: center;
+}
+
+.tool-audit { --tone: var(--cyan); }
+
+.tool-audit-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(148, 163, 184, .1);
+}
+.tool-audit-head h4 {
+  margin: 7px 0 0;
+  color: var(--white);
+  font: 600 16px var(--sans);
+  letter-spacing: -.015em;
+}
+.tool-audit-total {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  padding: 6px 11px;
+  border: 1px solid rgba(125, 212, 207, .28);
+  color: var(--cyan);
+  font: 9.5px var(--mono);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+/* ── Summary counters ────────────────────────────────────────────────────── */
+.tool-audit-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(112px, 1fr));
+  gap: 10px;
+  margin: 16px 0 18px;
+}
+.tool-stat {
+  padding: 11px 13px;
+  border: 1px solid var(--line);
+  border-left: 2px solid var(--tone);
+  background: rgba(255, 255, 255, .012);
+}
+.tool-stat strong {
+  display: block;
+  color: var(--white);
+  font: 600 20px var(--heading);
+  line-height: 1;
+}
+.tool-stat span {
+  display: block;
+  margin-top: 5px;
+  color: var(--dim);
+  font: 9px var(--mono);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.tool-stat.is-ok { --tone: var(--green); }
+.tool-stat.is-empty { --tone: var(--dim); }
+.tool-stat.is-failed { --tone: var(--danger); }
+.tool-stat.is-unavailable { --tone: var(--gold); }
+
+/* ── Call rows ───────────────────────────────────────────────────────────── */
+.tool-call-list { margin: 0; padding: 0; list-style: none; }
+
+.tool-call {
+  --tone: var(--green);
+  margin-bottom: 7px;
+  border: 1px solid var(--line);
+  border-left: 2px solid var(--tone);
+  background: rgba(255, 255, 255, .012);
+  overflow: hidden;
+}
+.tool-call.is-ok { --tone: var(--green); }
+.tool-call.is-empty { --tone: #566171; }
+.tool-call.is-failed { --tone: var(--danger); }
+.tool-call.is-unavailable { --tone: var(--gold); }
+
+.tool-call-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 11px 13px;
+  border: 0;
+  background: none;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background .18s;
+}
+.tool-call-head:hover { background: rgba(255, 255, 255, .022); }
+
+.tool-chevron {
+  flex-shrink: 0;
+  color: var(--dim);
+  transition: transform .22s ease, color .18s;
+}
+.tool-chevron.is-open { transform: rotate(90deg); color: var(--tone); }
+.tool-call-head:hover .tool-chevron { color: var(--tone); }
+
+.tool-outcome-icon { flex-shrink: 0; color: var(--tone); }
+
+.tool-name {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  color: var(--white);
+  font: 12px var(--mono);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tool-caller {
+  flex-shrink: 0;
+  padding: 3px 8px;
+  border: 1px solid rgba(148, 163, 184, .2);
+  color: var(--muted);
+  font: 8.5px var(--mono);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.tool-outcome-label {
+  flex-shrink: 0;
+  color: var(--tone);
+  font: 9px var(--mono);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.tool-duration {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+  min-width: 58px;
+  justify-content: flex-end;
+  color: var(--dim);
+  font: 9.5px var(--mono);
+}
+
+/* ── Expanded detail ─────────────────────────────────────────────────────── */
+.tool-call-body { overflow: hidden; }
+.tool-call-inner {
+  padding: 2px 13px 13px 36px;
+  border-top: 1px solid rgba(148, 163, 184, .08);
+}
+
+.tool-block { margin-top: 12px; }
+.tool-block-label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--dim);
+  font: 8.5px var(--mono);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.tool-block-text {
+  margin: 0;
+  color: var(--muted);
+  font: 12px/1.65 var(--sans);
+}
+
+.tool-args { display: flex; flex-wrap: wrap; gap: 6px; }
+.tool-arg {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  max-width: 100%;
+  padding: 4px 9px;
+  border: 1px solid rgba(125, 212, 207, .18);
+  background: rgba(125, 212, 207, .04);
+  color: var(--white);
+  font: 11px var(--mono);
+  overflow-wrap: anywhere;
+}
+.tool-arg em {
+  color: var(--cyan);
+  font-style: normal;
+  letter-spacing: .04em;
+  opacity: .85;
+}
+
+.tool-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(148, 163, 184, .08);
+}
+.tool-evidence {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--cyan);
+  font: 9.5px var(--mono);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.tool-evidence.is-none { color: var(--dim); }
+.tool-foot time { color: var(--dim); font: 9.5px var(--mono); }
+
+.tool-audit-note {
+  margin: 16px 0 0;
+  padding-top: 12px;
+  border-top: 1px solid rgba(148, 163, 184, .08);
+  color: var(--dim);
+  font: 11px/1.65 var(--sans);
+}
+
+@media (max-width: 640px) {
+  .tool-call-head { flex-wrap: wrap; gap: 8px; }
+  .tool-name { flex-basis: 100%; order: -1; }
+  .tool-call-inner { padding-left: 13px; }
+}
